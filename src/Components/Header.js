@@ -34,8 +34,8 @@ const Header = () => {
 
           {!isLoggedIn &&
             <div className='flex-r'>
-              <p onClick={signInUser} className='md-6'>Sign In</p>
-              <p onClick={registerNewUser} className='md-5 offset-md-1'>Register</p>
+              <p onClick={signInUser} className='md-6 pointer'>Sign In</p>
+              <p onClick={registerNewUser} className='md-5 offset-md-1 pointer'>Register</p>
             </div>
           }
           {

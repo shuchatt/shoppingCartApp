@@ -1,0 +1,20 @@
+.container-sign{
+  width: auto;
+}
+
+.sign-in-pad{
+  margin-top: 170px;
+  width: auto;
+  padding-bottom: 30px;
+
+}
+
+.login-btn{
+  margin-top: 30px;
+  color: white;
+  background: #BD2440;
+  border-radius: 1px;
+  text-align: center;
+  padding:10px;
+  width: 100%;
+}
