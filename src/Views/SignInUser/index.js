@@ -63,6 +63,7 @@ const SignInUser = () => {
                 <input
                    ref={emailRef} 
                    name='email'  
+                   autoComplete='off'
                    onMouseDown={()=>{changeLabel(emailRef.current.name)}} 
                    onMouseLeave={()=>{revertLabel(emailRef.current.name)}}
                    type='email'/>
@@ -71,6 +72,7 @@ const SignInUser = () => {
                 <input 
                     ref={passwordRef} 
                     name='password' 
+                    autoComplete='off'
                     onMouseDown={()=>{changeLabel(passwordRef.current.name)}} 
                     onMouseLeave={()=>{revertLabel(passwordRef.current.name)}} 
                     type='password'/>

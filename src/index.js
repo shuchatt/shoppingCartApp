@@ -7,6 +7,7 @@ import {
 import HomePage from "./Views/HomePage";
 import SignInUser from './Views/SignInUser'
 import Registration from "./Views/Register";
+import ProductPage from './Views/ProductListing'
 import './index.css';
 
 const root = ReactDOM.createRoot(
@@ -18,6 +19,8 @@ root.render(
       <Route path="/" element={<HomePage />} />
       <Route path="/signInUser" element={<SignInUser />} />
       <Route path="/registerNewUser" element={<Registration/>}/>
+      <Route path='/products' element={<ProductPage/>}/>
+      <Route path='/products/:categoryId' element={<ProductPage/>}/>
     </Routes>
   </BrowserRouter>
 );

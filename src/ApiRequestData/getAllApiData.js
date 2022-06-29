@@ -10,7 +10,6 @@ export async function getBannerData(){
 
 export async function getCategoryData(){
   try{
-    alert("ok")
     const data = await fetch("http://localhost:5000/categories")
     const response = await data.json()
     return response

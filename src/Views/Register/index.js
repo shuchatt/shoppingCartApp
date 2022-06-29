@@ -76,6 +76,7 @@ const RegisterUser = () => {
                 <input
                      ref={FirstNameRef} 
                      name='name' 
+                     autoComplete='off'
                      onMouseDown={()=>{changeLabel(FirstNameRef.current.name)}} 
                      onMouseLeave={()=>{revertLabel(FirstNameRef.current.name)}}
                      type='text'/>
@@ -85,6 +86,7 @@ const RegisterUser = () => {
                 <input 
                     ref={LastNameRef} 
                     name='surname' 
+                    autoComplete='off'
                     onMouseDown={()=>{changeLabel(LastNameRef.current.name)}} 
                     onMouseLeave={()=>{revertLabel(LastNameRef.current.name)}}
                     type='text'/>
@@ -94,6 +96,7 @@ const RegisterUser = () => {
                 <input 
                     ref={emailRef} 
                     name='email' 
+                    autoComplete='off'
                     onMouseDown={()=>{changeLabel(emailRef.current.name)}} 
                     onMouseLeave={()=>{revertLabel(emailRef.current.name)}}
                     type='email'/>

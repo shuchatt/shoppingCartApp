@@ -36,6 +36,10 @@
   flex-direction: column;
 }
 
+.flex-w{
+  flex-wrap: wrap;
+}
+
 .justify-center{
   justify-content: center;
 }

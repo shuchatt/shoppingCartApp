@@ -80,7 +80,8 @@ const fetchCategoryData = async () => {
               {!!categoryData.length && categoryData.map((item, index) => {
                 return(
                   <AlternateSections
-                    key={index}
+                    key={item.id}
+                    uniqueId={item.id}
                     geometry={ index % 2 === 0 ? 'right' : 'left'}
                     imgUrl={item.imageUrl}
                     heading={item.name}

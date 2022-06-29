@@ -1,7 +1,13 @@
 import '../CSS/alternateSection.css'
+import { useNavigate } from 'react-router-dom'
 
+const AlternateSections = ({uniqueId, geometry, imgUrl, heading, desc, btnText }) => {
+const navigate = useNavigate()
 
-const AlternateSections = ({geometry, imgUrl, heading, desc, btnText }) => {
+const goToProductPage = (id) => {
+  navigate(`/products/${id}`)
+}
+
   return (
     <div className="container-alternate">
       {
@@ -12,7 +18,7 @@ const AlternateSections = ({geometry, imgUrl, heading, desc, btnText }) => {
             <div className='text-block md-5 offset-md-1 flex-c align-center justify-spc-between'>
                 <h2>{heading}</h2>
                 <p className='semi-bold'>{desc}</p>
-                <div className='btn pointer'>
+                <div title={btnText} onClick={()=>{goToProductPage(uniqueId)}} className='btn pointer'>
                   {`Explore ${btnText}`}
                 </div>
             </div>
@@ -24,7 +30,7 @@ const AlternateSections = ({geometry, imgUrl, heading, desc, btnText }) => {
             <div className='text-block flex-c md-5 align-center justify-spc-between'>
                 <h2>{heading}</h2>
                 <p className='semi-bold'>{desc}</p>
-                <div className='btn pointer'>
+                <div title={btnText} onClick={()=>{goToProductPage(uniqueId)}} className='btn pointer'>
                   {`Explore ${btnText}`}
                 </div>
             </div>
