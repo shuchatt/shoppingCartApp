@@ -8,7 +8,7 @@ const AlternateSections = ({geometry, imgUrl, heading, desc, btnText }) => {
         geometry === 'right' ?
 
           <div className='md-12 flex-r'>
-            <img src={imgUrl} className='md-5'/>
+            <img alt={heading} src={imgUrl} className='md-5'/>
             <div className='text-block md-5 offset-md-1 flex-c align-center justify-spc-between'>
                 <h2>{heading}</h2>
                 <p className='semi-bold'>{desc}</p>
@@ -28,7 +28,7 @@ const AlternateSections = ({geometry, imgUrl, heading, desc, btnText }) => {
                   {`Explore ${btnText}`}
                 </div>
             </div>
-            <img src={imgUrl} className='md-5 offset-md-1'/>
+            <img alt={heading} src={imgUrl} className='md-5 offset-md-1'/>
           </div>
 
       }

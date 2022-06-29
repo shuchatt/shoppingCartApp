@@ -1,8 +1,8 @@
 export async function getBannerData(){
   try{
     const data = await fetch("http://localhost:5000/banners")
-    const res = await data.json()
-    return res
+    const response = await data.json()
+    return response
   }catch(err){
     return err
   }
@@ -10,9 +10,10 @@ export async function getBannerData(){
 
 export async function getCategoryData(){
   try{
-    const data = await fetch("http://localhost:5000/catgories")
-    const res = await data.json()
-    return res
+    alert("ok")
+    const data = await fetch("http://localhost:5000/categories")
+    const response = await data.json()
+    return response
   }catch(err){
     return err
   }
@@ -21,8 +22,8 @@ export async function getCategoryData(){
 export async function getProductData(){
   try{
     const data = await fetch("http://localhost:5000/products")
-    const res = await data.json()
-    return res
+    const response = await data.json()
+    return response
   }catch(err){
     return err
   }
@@ -36,8 +37,8 @@ export async function addToCart(id){
         id: id
       })
     })
-    const res = await data.json()
-    return res
+    const response = await data.json()
+    return response
   }catch(err){
     return err
   }
