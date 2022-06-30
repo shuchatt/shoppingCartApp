@@ -1,4 +1,6 @@
-import '../../CSS/cart.css'
+import '../../CSS/cart.css';
+import '../../CSS/tablet.css';
+import '../../CSS/mobile.css';
 import React, { useEffect, useState } from 'react'
 import { storeCartDataLocally } from '../../Utility/StoreLocally'
 import { useNavigate } from 'react-router-dom'
@@ -8,7 +10,6 @@ import { retreiveLocalCartData, retreiveLocalProductData } from '../../Utility/R
 const CartView = ({closeBtn, updateCartPage}) => {
     const [products, setProducts] = useState([])
     const [cartItems, setCartItems] = useState([])
-    const [inCartProducts, setAddedCart] = useState([])
     const [sum,setSum] = useState(0)
     const navigate = useNavigate()
 
@@ -17,28 +18,15 @@ const CartView = ({closeBtn, updateCartPage}) => {
         retrieveCartData()
     },[])
 
-    useEffect(()=> {
-        if(!!cartItems.length && !!products.length){
-            let data = []
-            cartItems.forEach((item) => {
-                products.forEach( i => {
-                    if(item.id === i.id)
-                        data=[...data,{...i,amt: item.amt}]
-                })
-            })
-            setAddedCart(data)
-        }
-
-    },[cartItems, products])
-
 
     useEffect(() => {
-        storeCartDataLocally(inCartProducts)
+        storeCartDataLocally(cartItems)
         let totalProductSum = 0
-        inCartProducts.forEach(a => { totalProductSum += (a.price * a.amt)})
+        cartItems.forEach(a => { totalProductSum += (a.price * a.amt)})
         setSum(totalProductSum)
         updateCartPage()
-    },[inCartProducts])
+    },[cartItems])
+
 
     const retrieveCartData = () => {
         let cartItems = retreiveLocalCartData()
@@ -48,21 +36,20 @@ const CartView = ({closeBtn, updateCartPage}) => {
     const retrieveProductData = () => {
         let products = retreiveLocalProductData()
         setProducts(products)
-
     }
 
     const increaseAmt = (id) => {
-        let items = [...inCartProducts]
+        let items = [...cartItems]
         items.forEach(item => {
             if(item.id === id){
                 item.amt = item.amt + 1;
             }
         })
-        setAddedCart(items)
+        setCartItems(items)
     }
 
     const decreaseAmt = (id) => {
-        let items = [...inCartProducts]
+        let items = [...cartItems]
         items.forEach( item => {
             if(item.id === id){
                 if(item.amt === 1)
@@ -72,7 +59,7 @@ const CartView = ({closeBtn, updateCartPage}) => {
             }
         })
         items = items.filter((a) => a.amt !==0 )
-        setAddedCart(items)
+        setCartItems(items)
     }
 
     const checkout = () => {
@@ -86,8 +73,8 @@ const CartView = ({closeBtn, updateCartPage}) => {
     return (
             <div className='cart-placeholder'>
                 <div className='flex-r md-12 heading align-center'>
-                        {inCartProducts.length > 0 ? 
-                        <h3 className='md-4 offset-md-2'>My Cart {inCartProducts.length} items</h3>
+                        {cartItems.length > 0 ? 
+                        <h3 className='md-4 offset-md-2'>My Cart {cartItems.length} items</h3>
                             :
                         <h3 className='md-4 offset-md-2'>My Cart</h3>}
                         <button onClick={closeCart} className='pointer close-cart-btn md-2 offset-md-4'>X</button>
@@ -95,9 +82,9 @@ const CartView = ({closeBtn, updateCartPage}) => {
                 
                 <div className='listing md-12'>
                     {
-                        inCartProducts.length > 0 ?
+                        cartItems.length > 0 ?
                             <ul>
-                                {!!inCartProducts && inCartProducts.length > 0 && inCartProducts.map((item) => {
+                                {!!cartItems && cartItems.length > 0 && cartItems.map((item) => {
                                     return(
                                         <li className='flex-r md-12' key={item.id}>
                                             <img src={item.imageURL} alt={item.description} className='pro-img md-2'/>
@@ -131,7 +118,7 @@ const CartView = ({closeBtn, updateCartPage}) => {
 
                 <div className='checkout-section flex-c align-center justify-start'>
                     {
-                        !!inCartProducts.length ? 
+                        !!cartItems.length ? 
                         <React.Fragment>
                             <p>Promo code can be applied on payment page.</p>
                             <div onClick={checkout} className='pointer flex-r justify-spc-around align-center checkout-block'>

@@ -1,8 +1,10 @@
 import '../CSS/header.css';
+import '../CSS/tablet.css';
 import { useState, useEffect} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import cartLogo from '../StaticImg/cart.svg';
 import { checkIfUserIsSignedUp } from '../Utility/CheckLogin';
+
 const logoImg = require("../StaticImg/logo.png");
 
 
@@ -37,8 +39,8 @@ const Header = ({itemsInCart, showCart}) => {
 
   return (
     <div className='header-container flex-r align-center'>
-
-      <img alt="logo-homepage" src={logoImg} className='pointer sabka-bazaar-img offset-md-1 md-2'/>
+      
+      <img onClick={() => {navigate('/')}} alt="logo-homepage" src={logoImg} className='pointer sabka-bazaar-img offset-md-1 md-2'/>
 
       <div className='nav-links flex-r offset-md-1 md-2'>
           <Link className='link semi-bold md-5' to="/">Home</Link>
@@ -48,8 +50,8 @@ const Header = ({itemsInCart, showCart}) => {
       <div className='loginPanel flex-c offset-md-3 md-1'>
 
           {!isLoggedIn &&
-            <div className='flex-r'>
-              <p onClick={signInUser} className='md-6 pointer'>Sign In</p>
+            <div className='mobile-link flex-r'>
+              <p onClick={signInUser} className='md-6 pointer no-wrap'>Sign In</p>
               <p onClick={registerNewUser} className='md-5 offset-md-1 pointer'>Register</p>
             </div>
           }

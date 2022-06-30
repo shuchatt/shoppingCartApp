@@ -1,3 +1,4 @@
+/* Store data in localStorage API */
 export const storeCartDataLocally = (items) => {
     localStorage.setItem("cartData", JSON.stringify(items))
 }

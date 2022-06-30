@@ -1,3 +1,5 @@
+/* Authentication functions */
+/* check sign in */
 export function checkIfUserIsSignedUp(){
     return new Promise ((resolve, reject) =>{
         let loginDetails = JSON.parse(sessionStorage.getItem("currentLoggedUser"))
@@ -11,7 +13,7 @@ export function checkIfUserIsSignedUp(){
 
 
 
-
+/* create new sign in record */
 export function createCurrentUser({email, password}){
     return new Promise((resolve, reject) => {
      let loggedData = JSON.parse(localStorage.getItem("LoginData"))
@@ -46,7 +48,7 @@ export function createCurrentUser({email, password}){
 }
 
 
-
+/* create new user record */
 export function createNewUserRecord({email, password}){
     return new Promise((resolve, reject) => {
         let loggedData = JSON.parse(localStorage.getItem("LoginData"))
@@ -85,7 +87,7 @@ export function createNewUserRecord({email, password}){
 }
 
 
-
+/* store user credentials in session storage */
 function storeCredentialsInSession(email, password){
     sessionStorage.setItem("currentLoggedUser", JSON.stringify({
         email: email, 

@@ -1,0 +1,35 @@
+@media only screen and (max-width:700px){
+    .banner-section{
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        margin-top: 85px !important;
+    }
+    .sabka-bazaar-img{
+        margin-left: 0px !important;
+    }
+    .nav-links{
+        display: none !important;
+    }
+    .header-container{
+        height: 50px !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+    .mobile-link{
+        display: none !important;
+    }
+    .cart-menu-section{
+        margin: 0!important;
+        width: 140px !important;
+    }
+    .descr{
+        font-size: 14px !important;
+    }
+    .btn{
+        margin-top: 10px !important;
+        font-size: 12px !important;
+    }
+
+    
+    
+}

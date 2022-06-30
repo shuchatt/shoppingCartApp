@@ -3,6 +3,7 @@ import Footer from '../../Components/Footer';
 import Header from '../../Components/Header';
 import AlternateSections from '../../Components/AlternateSections';
 import '../../CSS/homepage.css';
+import '../../CSS/mobile.css';
 import {getBannerData, getCategoryData} from '../../ApiRequestData/getAllApiData';
 import Slider from "react-slick";
 import CartView from '../MiniCart/index'

@@ -2,10 +2,12 @@ import {useEffect, useRef, useState} from 'react';
 import Footer from '../../Components/Footer';
 import Header from '../../Components/Header';
 import '../../CSS/productPage.css';
+import '../../CSS/tablet.css';
 import { storeCartDataLocally, storeCategoryDataLocally, storeProductDataLocally } from '../../Utility/StoreLocally';
 import { getProductData, getCategoryData} from '../../ApiRequestData/getAllApiData';
 import { useNavigate,useParams } from 'react-router-dom';
 import CartView from '../MiniCart';
+import { retreiveLocalCartData } from '../../Utility/RetrieveLocalData';
 
 
 const ProductListing = () => {
@@ -76,7 +78,7 @@ const ProductListing = () => {
     }
    
     const retrieveCartData = () => {
-        let data = JSON.parse(localStorage.getItem("cartData"))
+        let data = retreiveLocalCartData()
         if(!!data)
             setCartElements(data)
     }
