@@ -21,6 +21,8 @@ const HomePage = () => {
   const runUseEffectOnce = useRef(false)
   const [bannerData,setBannerData] = useState([])
   const [categoryData,setCategoryData] = useState([])
+  const [itemsInCart, setCartItems] = useState([])
+  const [viewCart, setViewCart] = useState(false)
   const settings = {
         dots: true,
         arrows: true,
@@ -41,6 +43,7 @@ useEffect(() => {
   if(!runUseEffectOnce.current){
       fetchBannerData()
       fetchCategoryData()
+      retrieveCartData()
       runUseEffectOnce.current = true
   }
 },[])
@@ -57,9 +60,18 @@ const fetchCategoryData = async () => {
   setCategoryData(filteredData)
 }
 
+const retrieveCartData = () => {
+  setCartItems(JSON.parse(localStorage.getItem("cartData")))
+}
+
+const showCart = () =>{
+  !!viewCart ? setViewCart(false) : setViewCart(true)
+}
+
+
   return (
     <div>
-        <Header/>
+        <Header itemsInCart={!!itemsInCart && itemsInCart.length > 0 ? itemsInCart.length : 0} showCart={showCart}/>
 
         <div className='banner-section'>
           {

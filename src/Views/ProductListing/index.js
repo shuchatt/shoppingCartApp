@@ -11,6 +11,8 @@ const ProductListing = () => {
   const [productData, setProductData] = useState([])
   const [typeOfProduct, setProductTypes] = useState([])
   const [filteredProduct, setFilteredProduct] = useState([])
+  const [cartElements, setCartElements] = useState([])
+  const [viewCart,setViewCart] = useState(false)
   const navigate = useNavigate()
   const {categoryId} = useParams()
 
@@ -18,17 +20,18 @@ const ProductListing = () => {
     if(!runUseEffectOnce.current){
             fetchProductData()
             fetchCategoryData()
-            if(!!categoryId)
-                filterProduct(categoryId)
+            retrieveCartData()
             runUseEffectOnce.current = true
     }
     },[])
 
 
-    useEffect(()=>{
+    useEffect(() => {
         if(!categoryId)
             setFilteredProduct([])
-    },[categoryId])
+        else if (!!categoryId && !!typeOfProduct.length && !!productData.length)
+            filterProduct(categoryId)
+    },[categoryId, typeOfProduct, productData])
 
 
     const fetchCategoryData = async() => {
@@ -58,11 +61,33 @@ const ProductListing = () => {
         }
     }
 
-
+    const addToCart = (id) => {
+        let ids = [...cartElements]
+        ids = [...ids, id]
+        storeCartDataLocally(ids)
+        setCartElements(ids)
+    }
    
+    const retrieveCartData = () => {
+        let data = JSON.parse(localStorage.getItem("cartData"))
+        if(!!data)
+            setCartElements(data)
+    }
+
+    const storeCartDataLocally = (ids) => {
+        localStorage.setItem("cartData", JSON.stringify(ids))
+    }
+
+
+    const showCart = () => {
+        !!viewCart ? setViewCart(false) : setViewCart(true)
+    }
+
+
+
     return (
         <div>
-            <Header/>
+            <Header itemsInCart={!!cartElements && cartElements.length > 0 ? cartElements.length : 0} showCart={showCart}/>
                 <div className='product-wrapper md-12 flex-r'>
                     <div className='side-list offset-md-2 md-3'>
                         <ul>
@@ -88,7 +113,8 @@ const ProductListing = () => {
                                         
                                         <div className='flex-r md-12 align-center justify-spc-around price-buy-section'>
                                             <p className='price-section'>MRP Rs {item.price}</p>
-                                            <button className='buy-now pointer'>Buy Now</button>
+                                            {!cartElements.includes(item.id) && <button onClick={() => {addToCart(item.id)}} className='buy-now pointer'>Buy Now</button>}
+                                            {!!cartElements.includes(item.id) && <button disabled className='buy-now pointer'>Added to cart</button>}
                                         </div>
                                     </div>
                                 )
@@ -104,7 +130,8 @@ const ProductListing = () => {
                                         
                                         <div className='flex-r md-12 align-center justify-spc-around price-buy-section'>
                                             <p className='price-section'>MRP Rs {item.price}</p>
-                                            <button className='buy-now pointer'>Buy Now</button>
+                                            {!cartElements.includes(item.id) && <button onClick={() => {addToCart(item.id)}} className='buy-now pointer'>Buy Now</button>}
+                                            {!!cartElements.includes(item.id) && <button disabled className='buy-now pointer'>Added to cart</button>}
                                         </div>
                                     </div>
                                 )

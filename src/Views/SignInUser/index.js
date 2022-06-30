@@ -1,14 +1,17 @@
 import '../../CSS/signInUser.css';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
 import { createCurrentUser } from '../../Utility/CheckLogin';
 
 const SignInUser = () => {
+  const [itemsInCart, setCartItems] = useState([])
+  const [viewCart, setViewCart] = useState(false)
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const navigate = useNavigate()
+
 
   const getLoginDetails = (event) =>{
     event.preventDefault()
@@ -22,6 +25,7 @@ const SignInUser = () => {
     }
     createCurrentUser(loginData).then((resolvedData)=>{
         if(resolvedData === 'loggedIn'){
+          retrieveCartData()
           alert(`you have been logged in as ${emailRef.current.value}`)
           navigate("/")
         }
@@ -46,9 +50,20 @@ const SignInUser = () => {
     document.getElementById(data).style.fontSize = "13px"
   }
 
+  const retrieveCartData = () => {
+    setCartItems(JSON.parse(localStorage.getItem("cartData")))
+  }
+  
+  const showCart = () =>{
+    !!viewCart ? setViewCart(false) : setViewCart(true)
+  }
+  
+
+
   return (
     <div className="container-sign">
-      <Header/>
+      <Header itemsInCart={!!itemsInCart && itemsInCart.length > 0 ? itemsInCart.length : 0} showCart={showCart}/>
+        
           <div className='sign-in-pad flex-r align-center'>
 
             <div className='md-3 offset-md-3 flex-c align-start justify-spc-between'>

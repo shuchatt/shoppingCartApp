@@ -7,9 +7,8 @@ const logoImg = require("../StaticImg/logo.png");
 
 
 
-const Header = () => {
+const Header = ({itemsInCart, showCart}) => {
   const [isLoggedIn,setLoginData] = useState(null)
-  const itemCount = 0;
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -32,6 +31,9 @@ const Header = () => {
     setLoginData(null);
   }
   
+  const openCart = () => {
+    showCart()
+  }
 
   return (
     <div className='header-container flex-r align-center'>
@@ -61,7 +63,7 @@ const Header = () => {
 
           <div className='cart-menu-section flex-r align-center justify-center'>
               <img src={cartLogo} alt='cart-logo' className='md-3 offset-md-1'/>
-              <p className='offset-md-2 md-4 item-count'>{`${itemCount} items`}</p>
+              <p onClick={openCart} className='offset-md-2 md-4 pointer item-count semi-bold'>{`${itemsInCart > 0 ? itemsInCart : 0 } items`}</p>
           </div>
 
 

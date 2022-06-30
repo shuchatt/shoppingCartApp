@@ -12,7 +12,7 @@
 
 .side-list li{
     border-bottom: 1px dotted #686868;
-    text-align: center;
+    text-align: start;
     height: 20px;
     padding: 10px;
     color: #808080;

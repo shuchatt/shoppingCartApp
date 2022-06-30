@@ -1,11 +1,13 @@
 import '../../CSS/signInUser.css';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
 import { createNewUserRecord } from '../../Utility/CheckLogin';
 
 const RegisterUser = () => {
+  const [itemsInCart, setCartItems] = useState([])
+  const [viewCart, setViewCart] = useState(false)
   const FirstNameRef = useRef(null)
   const LastNameRef = useRef(null)
   const emailRef = useRef(null);
@@ -34,9 +36,11 @@ const RegisterUser = () => {
         }
         createNewUserRecord(loginData).then((resolvedData)=>{
             if(resolvedData === 'new'){
+                retrieveCartData()
                 alert(`you have been been registered and logged in as ${emailRef.current.value}`)
                 navigate("/")
             } else {
+                retrieveCartData()
                 alert(`you are already registered with us as ${emailRef.current.value}. Signing you in.`)
                 navigate("/")
             }
@@ -58,9 +62,19 @@ const RegisterUser = () => {
     document.getElementById(data).style.fontSize = "13px"
   }
 
+  const retrieveCartData = () => {
+    setCartItems(JSON.parse(localStorage.getItem("cartData")))
+  }
+  
+  const showCart = () =>{
+    !!viewCart ? setViewCart(false) : setViewCart(true)
+  }
+  
+
+
   return (
     <div className="container-sign">
-      <Header/>
+      <Header itemsInCart={!!itemsInCart && itemsInCart.length > 0 ? itemsInCart.length : 0} showCart={showCart}/>
           <div className='sign-in-pad flex-r align-center'>
 
             <div className='md-3 offset-md-3 flex-c align-start justify-spc-between'>
