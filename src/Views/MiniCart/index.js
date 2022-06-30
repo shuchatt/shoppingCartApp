@@ -2,6 +2,7 @@ import '../../CSS/cart.css'
 import React, { useEffect, useState } from 'react'
 import { storeCartDataLocally } from '../../Utility/StoreLocally'
 import { useNavigate } from 'react-router-dom'
+import { retreiveLocalCartData, retreiveLocalProductData } from '../../Utility/RetrieveLocalData'
 
 
 const CartView = ({closeBtn, updateCartPage}) => {
@@ -40,12 +41,12 @@ const CartView = ({closeBtn, updateCartPage}) => {
     },[inCartProducts])
 
     const retrieveCartData = () => {
-        let cartItems = JSON.parse(localStorage.getItem("cartData"))
+        let cartItems = retreiveLocalCartData()
         !!cartItems && !!cartItems.length && setCartItems(cartItems)
     }
 
     const retrieveProductData = () => {
-        let products = JSON.parse(localStorage.getItem("productData"))
+        let products = retreiveLocalProductData()
         setProducts(products)
 
     }

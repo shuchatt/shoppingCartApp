@@ -65,7 +65,12 @@ const ProductListing = () => {
 
     const addToCart = (id) => {
         let items = [...cartElements]
-        items = [...items, {id: id, amt: 1}]
+        if(!!productData && !!productData.length){
+            productData.forEach(i => {
+                if(i.id === id)
+                items = [...items, {...i,amt: 1}]
+            })
+        }
         storeCartDataLocally(items)
         setCartElements(items)
     }
