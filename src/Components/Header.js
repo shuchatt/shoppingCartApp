@@ -61,9 +61,9 @@ const Header = ({itemsInCart, showCart}) => {
             </div>
           }
 
-          <div className='cart-menu-section flex-r align-center justify-center'>
+          <div onClick={openCart} className='pointer cart-menu-section flex-r align-center justify-center'>
               <img src={cartLogo} alt='cart-logo' className='md-3 offset-md-1'/>
-              <p onClick={openCart} className='offset-md-2 md-4 pointer item-count semi-bold'>{`${itemsInCart > 0 ? itemsInCart : 0 } items`}</p>
+              <p className='offset-md-2 md-4 pointer item-count semi-bold'>{`${itemsInCart > 0 ? itemsInCart : 0 } items`}</p>
           </div>
 
 

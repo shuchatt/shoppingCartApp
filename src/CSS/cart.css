@@ -1,12 +1,43 @@
 .cart-placeholder{
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
     position: fixed;
     right: 0px;
     top:120px;
     z-index: 999;
     width: 40%;
-    min-height: 60px;
+    background: #dcdcdc;
     border-left: 1px solid #808080;
+    border-bottom: 2px solid #808080;
+    -webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
+
+@-webkit-keyframes slide-in-right {
+    0% {
+      -webkit-transform: translateX(1000px);
+              transform: translateX(1000px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slide-in-right {
+    0% {
+      -webkit-transform: translateX(1000px);
+              transform: translateX(1000px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  
 
 .heading{
     color: white;
@@ -27,14 +58,13 @@
 }
 
 .listing{
-    min-height: 100vh;
-    overflow: hidden;
+    height: 70vh;
     width: 100%;
+    overflow: scroll;
 }
 
 .listing ul{
     overflow: scroll;
-    min-height: 70vh;
     background-color: #dcdcdc;
 }
 
@@ -62,7 +92,6 @@
     width: 25px;
     border-radius: 50%;
     border: none;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
 
 .action-center{
@@ -83,4 +112,12 @@
     background-color: #BD2440;
     color:white;
     padding: 10px;
+}
+
+.blank-cart{
+    background-color: white;
+    overflow: scroll;
+    padding-top: 40% ;
+    text-align: center;
+    height: 50vh;
 }
