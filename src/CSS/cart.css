@@ -1,4 +1,86 @@
-.viewPort-class{
-    height: 100vh;
+.cart-placeholder{
+    position: fixed;
+    right: 0px;
+    top:120px;
+    z-index: 999;
+    width: 40%;
+    min-height: 60px;
+    border-left: 1px solid #808080;
+}
+
+.heading{
+    color: white;
+    background-color: black;
+    height: 40px;
+    padding: 10px;
+    white-space: nowrap;
+}
+
+.close-cart-btn{
+    background-color: transparent;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: capitalize;
+    outline: none;
+    border: none;
+}
+
+.listing{
+    min-height: 100vh;
+    overflow: hidden;
     width: 100%;
+}
+
+.listing ul{
+    overflow: scroll;
+    min-height: 70vh;
+    background-color: #dcdcdc;
+}
+
+.listing li{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    background-color: white;
+    padding: 15px;
+    height: 80px;
+    list-style: none;
+}
+
+.pro-img{
+    height: 80px;
+    width: 45px;
+    background-size: contain;
+}
+
+.add-btn, .minus-btn{
+    background-color: #BD2440;
+    color: white;
+    font-size: 14px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+.action-center{
+    margin-top: 20px;
+}
+
+.checkout-section{
+    bottom: 0px;
+    background-color: white;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.checkout-block{
+    margin-top: 10px;
+    width: 100%;
+    font-size: 15px;
+    background-color: #BD2440;
+    color:white;
+    padding: 10px;
 }

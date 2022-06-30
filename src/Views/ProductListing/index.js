@@ -2,8 +2,10 @@ import {useEffect, useRef, useState} from 'react';
 import Footer from '../../Components/Footer';
 import Header from '../../Components/Header';
 import '../../CSS/productPage.css';
+import { storeCartDataLocally, storeCategoryDataLocally, storeProductDataLocally } from '../../Utility/StoreLocally';
 import { getProductData, getCategoryData} from '../../ApiRequestData/getAllApiData';
 import { useNavigate,useParams } from 'react-router-dom';
+import CartView from '../MiniCart';
 
 
 const ProductListing = () => {
@@ -13,8 +15,10 @@ const ProductListing = () => {
   const [filteredProduct, setFilteredProduct] = useState([])
   const [cartElements, setCartElements] = useState([])
   const [viewCart,setViewCart] = useState(false)
+
   const navigate = useNavigate()
   const {categoryId} = useParams()
+
 
     useEffect(() => {
     if(!runUseEffectOnce.current){
@@ -36,17 +40,15 @@ const ProductListing = () => {
 
     const fetchCategoryData = async() => {
         let data = await getCategoryData()
-        localStorage.setItem("categoryData", JSON.stringify(data))
+        storeCategoryDataLocally(data)
         setProductTypes(data)
     }
 
-
     const fetchProductData = async () => {
         let data = await getProductData()
-        localStorage.setItem("productData", JSON.stringify(data))
+        storeProductDataLocally(data)
         setProductData(data)
     }
-
 
     const filterProduct = (id) =>{
         let urlParams = undefined
@@ -62,10 +64,10 @@ const ProductListing = () => {
     }
 
     const addToCart = (id) => {
-        let ids = [...cartElements]
-        ids = [...ids, id]
-        storeCartDataLocally(ids)
-        setCartElements(ids)
+        let items = [...cartElements]
+        items = [...items, {id: id, amt: 1}]
+        storeCartDataLocally(items)
+        setCartElements(items)
     }
    
     const retrieveCartData = () => {
@@ -74,19 +76,26 @@ const ProductListing = () => {
             setCartElements(data)
     }
 
-    const storeCartDataLocally = (ids) => {
-        localStorage.setItem("cartData", JSON.stringify(ids))
-    }
-
-
+    
     const showCart = () => {
         !!viewCart ? setViewCart(false) : setViewCart(true)
     }
 
+    const hasBeenAddedToCart = (cartElements, id) =>{
+        let flag = false
+        cartElements.forEach(element => {
+            if(element.id === id)
+                flag = true
+        });
+        return flag
+    }
+
+    const closeBtn = () => {setViewCart(false)}
 
 
     return (
         <div>
+            {!!viewCart && <CartView closeBtn={closeBtn} updateCartPage={retrieveCartData}/>}
             <Header itemsInCart={!!cartElements && cartElements.length > 0 ? cartElements.length : 0} showCart={showCart}/>
                 <div className='product-wrapper md-12 flex-r'>
                     <div className='side-list offset-md-2 md-3'>
@@ -113,8 +122,8 @@ const ProductListing = () => {
                                         
                                         <div className='flex-r md-12 align-center justify-spc-around price-buy-section'>
                                             <p className='price-section'>MRP Rs {item.price}</p>
-                                            {!cartElements.includes(item.id) && <button onClick={() => {addToCart(item.id)}} className='buy-now pointer'>Buy Now</button>}
-                                            {!!cartElements.includes(item.id) && <button disabled className='buy-now pointer'>Added to cart</button>}
+                                            {!hasBeenAddedToCart(cartElements, item.id) && <button onClick={() => {addToCart(item.id)}} className='buy-now pointer'>Buy Now</button>}
+                                            {!!hasBeenAddedToCart(cartElements, item.id) && <button disabled className='buy-now pointer'>Added to cart</button>}
                                         </div>
                                     </div>
                                 )
@@ -130,8 +139,8 @@ const ProductListing = () => {
                                         
                                         <div className='flex-r md-12 align-center justify-spc-around price-buy-section'>
                                             <p className='price-section'>MRP Rs {item.price}</p>
-                                            {!cartElements.includes(item.id) && <button onClick={() => {addToCart(item.id)}} className='buy-now pointer'>Buy Now</button>}
-                                            {!!cartElements.includes(item.id) && <button disabled className='buy-now pointer'>Added to cart</button>}
+                                            {!hasBeenAddedToCart(cartElements, item.id) && <button onClick={() => {addToCart(item.id)}} className='buy-now pointer'>Buy Now</button>}
+                                            {!!hasBeenAddedToCart(cartElements, item.id) && <button disabled className='buy-now pointer'>Added to cart</button>}
                                         </div>
                                     </div>
                                 )

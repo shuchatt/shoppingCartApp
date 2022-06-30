@@ -5,6 +5,7 @@ import AlternateSections from '../../Components/AlternateSections';
 import '../../CSS/homepage.css';
 import {getBannerData, getCategoryData} from '../../ApiRequestData/getAllApiData';
 import Slider from "react-slick";
+import CartView from '../MiniCart/index'
 
 
 
@@ -68,9 +69,11 @@ const showCart = () =>{
   !!viewCart ? setViewCart(false) : setViewCart(true)
 }
 
+const closeBtn = () => { setViewCart(false)}
 
   return (
     <div>
+        {!!viewCart && <CartView closeBtn={closeBtn} updateCartPage={retrieveCartData}/>}
         <Header itemsInCart={!!itemsInCart && itemsInCart.length > 0 ? itemsInCart.length : 0} showCart={showCart}/>
 
         <div className='banner-section'>
