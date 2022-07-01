@@ -17,18 +17,25 @@ const ProductListing = () => {
   const [filteredProduct, setFilteredProduct] = useState([])
   const [cartElements, setCartElements] = useState([])
   const [viewCart,setViewCart] = useState(false)
-
+  const [forMobileList, setForMobileList] = useState(false)
+  // eslint-disable-next-line 
+  const [counter, setCounter] = useState(0)
   const navigate = useNavigate()
   const {categoryId} = useParams()
 
 
     useEffect(() => {
-    if(!runUseEffectOnce.current){
-            fetchProductData()
-            fetchCategoryData()
-            retrieveCartData()
-            runUseEffectOnce.current = true
-    }
+        if(!runUseEffectOnce.current){
+                fetchProductData()
+                fetchCategoryData()
+                retrieveCartData()
+                runUseEffectOnce.current = true
+                window.addEventListener('resize', reRenderResol )
+        }
+
+            return () => {
+                window.removeEventListener('resize', reRenderResol)
+            }
     },[])
 
 
@@ -39,6 +46,22 @@ const ProductListing = () => {
             filterProduct(categoryId)
            // eslint-disable-next-line
     },[categoryId, typeOfProduct, productData])
+
+
+    useEffect(() => {
+        if(window.innerWidth < `${760}`){
+            if(!!forMobileList)
+                document.getElementById('sideList').style.display = 'block';
+            else
+                document.getElementById('sideList').style.display = 'none';
+        }
+        // eslint-disable-next-line
+    },[forMobileList])
+
+
+
+    const reRenderResol = () => setCounter(counter => counter + 1)
+
 
 
     const fetchCategoryData = async() => {
@@ -100,22 +123,30 @@ const ProductListing = () => {
 
     const closeBtn = () => {setViewCart(false)}
 
-    
+    const openFilterForMobile = () => {
+        if(window.innerWidth < `${760}`){
+            !!forMobileList ? setForMobileList(false) : setForMobileList(true)
+        }
+    }
+
+
     return (
         <React.Fragment>
+            {window.innerWidth < `${760}` && <div onClick={openFilterForMobile} className='hamburger-icon pointer'>☰</div>}
             {!!viewCart && <CartView closeBtn = {closeBtn} updateCartPage = {retrieveCartData}/>}
             <div id='product-listing-body'>
                 <Header itemsInCart={!!cartElements && cartElements.length > 0 ? cartElements.length : 0} showCart={showCart}/>
                     <div className='product-wrapper md-12 flex-r'>
-                        <div className='side-list offset-md-2 md-3'>
+                        <div id='sideList' className='side-list offset-md-2 md-3'>
                             <ul>
-                                {!!typeOfProduct.length && typeOfProduct.map((item) => {
-                                    return (
-                                        <li name={item.id} key={item.id} onClick={() => {filterProduct(item.id)}} id={item.id} className='each-category pointer semi-bold'>
-                                            {item.name}
-                                        </li>
-                                    )
-                                })}
+                                        {window.innerWidth < `${760}` && <li onClick={() => {navigate('/products'); openFilterForMobile()}} id='allProducts' className='each-category pointer semi-bold'>All Products</li>}
+                                        {!!typeOfProduct.length && typeOfProduct.map((item) => {
+                                            return (
+                                                <li name={item.id} key={item.id} onClick={() => {filterProduct(item.id)}} id={item.id} className='each-category pointer semi-bold'>
+                                                    {item.name}
+                                                </li>
+                                            )
+                                        })}
                             </ul>
                         </div>
                         <div className='productList md-6'>
@@ -132,7 +163,7 @@ const ProductListing = () => {
                                             <div className='flex-r md-12 align-center justify-spc-around price-buy-section'>
                                                 <p className='price-section'>MRP Rs {item.price}</p>
                                                 {!hasBeenAddedToCart(cartElements, item.id) && <button onClick={() => {addToCart(item.id)}} className='buy-now pointer'>Buy Now</button>}
-                                                {!!hasBeenAddedToCart(cartElements, item.id) && <button disabled className='buy-now pointer'>Added to cart</button>}
+                                                {!!hasBeenAddedToCart(cartElements, item.id) && <button disabled className='added-now pointer'>Added to cart</button>}
                                             </div>
                                         </div>
                                     )
@@ -149,7 +180,7 @@ const ProductListing = () => {
                                             <div className='flex-r md-12 align-center justify-spc-around price-buy-section'>
                                                 <p className='price-section'>MRP Rs {item.price}</p>
                                                 {!hasBeenAddedToCart(cartElements, item.id) && <button onClick={() => {addToCart(item.id)}} className='buy-now pointer'>Buy Now</button>}
-                                                {!!hasBeenAddedToCart(cartElements, item.id) && <button disabled className='buy-now pointer'>Added to cart</button>}
+                                                {!!hasBeenAddedToCart(cartElements, item.id) && <button disabled className='added-now pointer'>Added to cart</button>}
                                             </div>
                                         </div>
                                     )

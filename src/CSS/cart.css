@@ -87,10 +87,10 @@
 .add-btn, .minus-btn{
     background-color: #BD2440;
     color: white;
-    font-size: 14px;
+    font-size: 16px;
     height: 25px;
     width: 25px;
-    border-radius: 50%;
+    border-radius: 30%;
     border: none;
 }
 

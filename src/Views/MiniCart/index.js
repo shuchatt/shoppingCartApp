@@ -63,8 +63,10 @@ const CartView = ({closeBtn, updateCartPage}) => {
         let items = [...cartItems]
         items.forEach( item => {
             if(item.id === id){
-                if(item.amt === 1)
+                if(item.amt === 1){
                     item.amt = 0;
+                    alert(`Removing ${item.name} from cart`)
+                }
                 else
                     item.amt = item.amt - 1;
             }

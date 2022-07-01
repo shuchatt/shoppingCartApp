@@ -65,3 +65,11 @@ li:active{
     outline: none;
     border: none;
 }
+
+.added-now{
+    background-color: #F37420;
+    color: white;
+    padding: 5px;
+    outline: none;
+    border: none;
+}
