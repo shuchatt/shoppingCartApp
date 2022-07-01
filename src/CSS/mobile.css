@@ -76,5 +76,14 @@
     .product-wrapper{
         margin-top: 70px !important;
     }
-    
+   .heading{
+    background-color: white !important;
+    color: black !important;
+   }
+   .close-cart-btn{
+    color: black !important;
+    }
+    .mobile-font{
+        font-size: 12px !important;
+    }
 }

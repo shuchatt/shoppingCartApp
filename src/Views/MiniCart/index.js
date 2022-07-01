@@ -117,8 +117,8 @@ const CartView = ({closeBtn, updateCartPage}) => {
                                                 <li className='flex-r md-12' key={item.id}>
                                                     <img src={item.imageURL} alt={item.description} className='pro-img md-2'/>
                                                     <div className='flex-c align-center offset-md-2 md-4'>
-                                                        <p className='semi-bold no-wrap'>
-                                                            {item.name}
+                                                        <p className='mobile-font semi-bold no-wrap'>
+                                                            {item.name.length > 50 ? item.name.substring(0,25).concat(" ...") : item.name}
                                                         </p>
                                                         <div className='flex-r md-12 action-center justify-spc-between'>
                                                             <button onClick={() => {decreaseAmt(item.id)}} className='minus-btn pointer'>-</button>
