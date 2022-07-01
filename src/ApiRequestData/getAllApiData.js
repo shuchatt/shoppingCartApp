@@ -1,6 +1,6 @@
 export async function getBannerData(){
   try{
-    const data = await fetch("http://localhost:5000/banners")
+    const data = await fetch("http://localhost:3000/banners")
     const response = await data.json()
     return response
   }catch(err){
@@ -10,7 +10,7 @@ export async function getBannerData(){
 
 export async function getCategoryData(){
   try{
-    const data = await fetch("http://localhost:5000/categories")
+    const data = await fetch("http://localhost:3000/categories")
     const response = await data.json()
     return response
   }catch(err){
@@ -20,7 +20,7 @@ export async function getCategoryData(){
 
 export async function getProductData(){
   try{
-    const data = await fetch("http://localhost:5000/products")
+    const data = await fetch("http://localhost:3000/products")
     const response = await data.json()
     return response
   }catch(err){
@@ -30,7 +30,7 @@ export async function getProductData(){
 
 export async function addToCart(id){
   try{
-    const data = await fetch("http://localhost:5000/addToCart",{
+    const data = await fetch("http://localhost:3000/addToCart",{
       method: 'POST',
       body: JSON.stringify({
         id: id
