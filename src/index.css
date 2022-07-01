@@ -12,6 +12,17 @@
   cursor: pointer;
 }
 
+/* modal container */
+.modal-div{
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  width: 100%;
+  z-index: 9999 !important;
+}
+
 /* fonts */
 .bold{
   font-weight: 700;

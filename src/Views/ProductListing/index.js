@@ -41,10 +41,6 @@ const ProductListing = () => {
     },[categoryId, typeOfProduct, productData])
 
 
-    useEffect(()=>{
-
-    })
-
     const fetchCategoryData = async() => {
         let data = await getCategoryData()
         storeCategoryDataLocally(data)
@@ -102,16 +98,12 @@ const ProductListing = () => {
         return flag
     }
 
-
-
-
-
     const closeBtn = () => {setViewCart(false)}
 
     
     return (
         <React.Fragment>
-            {!!viewCart && <CartView closeBtn = {closeBtn} updateCartPage = {retrieveCartData} />}
+            {!!viewCart && <CartView closeBtn = {closeBtn} updateCartPage = {retrieveCartData}/>}
             <div id='product-listing-body'>
                 <Header itemsInCart={!!cartElements && cartElements.length > 0 ? cartElements.length : 0} showCart={showCart}/>
                     <div className='product-wrapper md-12 flex-r'>
