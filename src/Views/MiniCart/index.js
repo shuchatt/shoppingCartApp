@@ -4,20 +4,17 @@ import '../../CSS/mobile.css';
 import React, { useEffect, useState } from 'react'
 import { storeCartDataLocally } from '../../Utility/StoreLocally'
 import { useNavigate } from 'react-router-dom'
-import { retreiveLocalCartData, retreiveLocalProductData } from '../../Utility/RetrieveLocalData'
+import { retreiveLocalCartData } from '../../Utility/RetrieveLocalData'
 
 
 const CartView = ({closeBtn, updateCartPage}) => {
-    const [products, setProducts] = useState([])
     const [cartItems, setCartItems] = useState([])
     const [sum,setSum] = useState(0)
     const navigate = useNavigate()
 
     useEffect(() => {
-        retrieveProductData()
         retrieveCartData()
     },[])
-
 
     useEffect(() => {
         storeCartDataLocally(cartItems)
@@ -25,6 +22,7 @@ const CartView = ({closeBtn, updateCartPage}) => {
         cartItems.forEach(a => { totalProductSum += (a.price * a.amt)})
         setSum(totalProductSum)
         updateCartPage()
+        // eslint-disable-next-line
     },[cartItems])
 
 
@@ -32,12 +30,7 @@ const CartView = ({closeBtn, updateCartPage}) => {
         let cartItems = retreiveLocalCartData()
         !!cartItems && !!cartItems.length && setCartItems(cartItems)
     }
-
-    const retrieveProductData = () => {
-        let products = retreiveLocalProductData()
-        setProducts(products)
-    }
-
+   
     const increaseAmt = (id) => {
         let items = [...cartItems]
         items.forEach(item => {
@@ -128,7 +121,7 @@ const CartView = ({closeBtn, updateCartPage}) => {
                         </React.Fragment>
                         :
                         <React.Fragment>
-                            <div className='pointer flex-r justify-spc-around align-center checkout-block'>
+                            <div onClick={() => {closeBtn()}} className='pointer flex-r justify-spc-around align-center checkout-block'>
                                 <p>Start Shopping</p>
                             </div>
                         </React.Fragment>

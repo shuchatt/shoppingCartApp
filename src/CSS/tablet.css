@@ -20,6 +20,7 @@
     }
     .listing li:active{
         background: white !important;
+        color: black !important;
     }
     .side-list{
         width: 15% !important;

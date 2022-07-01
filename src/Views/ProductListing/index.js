@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Footer from '../../Components/Footer';
 import Header from '../../Components/Header';
 import '../../CSS/productPage.css';
@@ -37,8 +37,13 @@ const ProductListing = () => {
             setFilteredProduct([])
         else if (!!categoryId && !!typeOfProduct.length && !!productData.length)
             filterProduct(categoryId)
+           // eslint-disable-next-line
     },[categoryId, typeOfProduct, productData])
 
+
+    useEffect(()=>{
+
+    })
 
     const fetchCategoryData = async() => {
         let data = await getCategoryData()
@@ -97,66 +102,72 @@ const ProductListing = () => {
         return flag
     }
 
+
+
+
+
     const closeBtn = () => {setViewCart(false)}
 
-
+    
     return (
-        <div>
-            {!!viewCart && <CartView closeBtn={closeBtn} updateCartPage={retrieveCartData}/>}
-            <Header itemsInCart={!!cartElements && cartElements.length > 0 ? cartElements.length : 0} showCart={showCart}/>
-                <div className='product-wrapper md-12 flex-r'>
-                    <div className='side-list offset-md-2 md-3'>
-                        <ul>
-                            {!!typeOfProduct.length && typeOfProduct.map((item) => {
-                                return (
-                                    <li name={item.id} key={item.id} onClick={() => {filterProduct(item.id)}} id={item.id} className='each-category pointer semi-bold'>
-                                        {item.name}
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </div>
-                    <div className='productList md-6'>
-                        <div className='flex-r flex-w md-12 list-products'>
-                            {!!productData.length && filteredProduct.length === 0 && productData.map((item) => {
-                                return (
-                                    <div key={item.id} id={item.id} className='each-product md-3 pointer flex-c align-start justify-spc-around semi-bold'>
-                                        <p className='bold'>{item.name}</p>
-                                        <div className='img-product' style={{backgroundImage: "url("+item.imageURL+")"}}/>
-                                        <p className='product-description'>
-                                            {item.description}
-                                        </p>
-                                        
-                                        <div className='flex-r md-12 align-center justify-spc-around price-buy-section'>
-                                            <p className='price-section'>MRP Rs {item.price}</p>
-                                            {!hasBeenAddedToCart(cartElements, item.id) && <button onClick={() => {addToCart(item.id)}} className='buy-now pointer'>Buy Now</button>}
-                                            {!!hasBeenAddedToCart(cartElements, item.id) && <button disabled className='buy-now pointer'>Added to cart</button>}
+        <React.Fragment>
+            {!!viewCart && <CartView closeBtn = {closeBtn} updateCartPage = {retrieveCartData} />}
+            <div id='product-listing-body'>
+                <Header itemsInCart={!!cartElements && cartElements.length > 0 ? cartElements.length : 0} showCart={showCart}/>
+                    <div className='product-wrapper md-12 flex-r'>
+                        <div className='side-list offset-md-2 md-3'>
+                            <ul>
+                                {!!typeOfProduct.length && typeOfProduct.map((item) => {
+                                    return (
+                                        <li name={item.id} key={item.id} onClick={() => {filterProduct(item.id)}} id={item.id} className='each-category pointer semi-bold'>
+                                            {item.name}
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </div>
+                        <div className='productList md-6'>
+                            <div className='flex-r flex-w md-12 list-products'>
+                                {!!productData.length && filteredProduct.length === 0 && productData.map((item) => {
+                                    return (
+                                        <div key={item.id} id={item.id} className='each-product md-3 pointer flex-c align-start justify-spc-around semi-bold'>
+                                            <p className='bold'>{item.name}</p>
+                                            <div className='img-product' style={{backgroundImage: "url("+item.imageURL+")"}}/>
+                                            <p className='product-description'>
+                                                {item.description}
+                                            </p>
+                                            
+                                            <div className='flex-r md-12 align-center justify-spc-around price-buy-section'>
+                                                <p className='price-section'>MRP Rs {item.price}</p>
+                                                {!hasBeenAddedToCart(cartElements, item.id) && <button onClick={() => {addToCart(item.id)}} className='buy-now pointer'>Buy Now</button>}
+                                                {!!hasBeenAddedToCart(cartElements, item.id) && <button disabled className='buy-now pointer'>Added to cart</button>}
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            })}
-                            {!!filteredProduct.length && filteredProduct.map((item) => {
-                                return (
-                                    <div key={item.id} id={item.id} className='each-product md-3 pointer flex-c align-start justify-spc-around semi-bold'>
-                                        <p className='bold'>{item.name}</p>
-                                        <div className='img-product' style={{backgroundImage: "url("+item.imageURL+")"}}/>
-                                        <p className='product-description'>
-                                            {item.description}
-                                        </p>
-                                        
-                                        <div className='flex-r md-12 align-center justify-spc-around price-buy-section'>
-                                            <p className='price-section'>MRP Rs {item.price}</p>
-                                            {!hasBeenAddedToCart(cartElements, item.id) && <button onClick={() => {addToCart(item.id)}} className='buy-now pointer'>Buy Now</button>}
-                                            {!!hasBeenAddedToCart(cartElements, item.id) && <button disabled className='buy-now pointer'>Added to cart</button>}
+                                    )
+                                })}
+                                {!!filteredProduct.length && filteredProduct.map((item) => {
+                                    return (
+                                        <div key={item.id} id={item.id} className='each-product md-3 pointer flex-c align-start justify-spc-around semi-bold'>
+                                            <p className='bold'>{item.name}</p>
+                                            <div className='img-product' style={{backgroundImage: "url("+item.imageURL+")"}}/>
+                                            <p className='product-description'>
+                                                {item.description}
+                                            </p>
+                                            
+                                            <div className='flex-r md-12 align-center justify-spc-around price-buy-section'>
+                                                <p className='price-section'>MRP Rs {item.price}</p>
+                                                {!hasBeenAddedToCart(cartElements, item.id) && <button onClick={() => {addToCart(item.id)}} className='buy-now pointer'>Buy Now</button>}
+                                                {!!hasBeenAddedToCart(cartElements, item.id) && <button disabled className='buy-now pointer'>Added to cart</button>}
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            })}
+                                    )
+                                })}
+                            </div>
                         </div>
                     </div>
-                </div>
-            <Footer/>
-        </div>
+                <Footer/>
+            </div>
+        </React.Fragment>
     )
 }
 
